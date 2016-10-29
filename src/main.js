@@ -1,5 +1,6 @@
-import Vue from 'vue'
+"use strict"
 import Beginner from './Beginner'
+import Vue from 'vue'
 /* eslint-disable no-new */
 var vm = new Vue({
   el: '#app',

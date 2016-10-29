@@ -65,10 +65,10 @@ var Two = {
         }
     }
 }
-var Three = {
-    template: '<div>ThreeThreeThreeThree</div>'
-}
-
+// var Three = {
+//     template: '<div>ThreeThreeThreeThree</div>'
+// }
+import Three from './Three'
 var chapterShow = {
         name:'chapterShow',
         props:['chapter'],
