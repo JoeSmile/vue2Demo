@@ -9,6 +9,8 @@ var env = process.env.NODE_ENV
 var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
 var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var merge = require('webpack-merge')
 
 module.exports = {
   entry: {
@@ -59,6 +61,12 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.scss/,
+        exclude: /^node_modules$/,
+        // loaders: ["style", "css", "sass"]
+        loaders: ExtractTextPlugin.extract("style-loader!css-loader!sass-loader")
+      },
+      {
         test: /\.json$/,
         loader: 'json'
       },
@@ -84,7 +92,7 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
+    loaders: merge(utils.cssLoaders({ sourceMap: useCssSourceMap }), {js: 'babel?presets=es2015'}),
     postcss: [
       require('autoprefixer')({
         browsers: ['last 2 versions']
